@@ -33,3 +33,65 @@ Inconvénients des boucles fonctionnelles :
 - Certaines boucles fonctionnelles peuvent ne pas être compatibles avec des versions plus anciennes de JavaScript (ECMAScript).
 
 En fin de compte, le choix entre les boucles natives et les boucles fonctionnelles dépend du contexte et des préférences du développeur. Les boucles natives offrent un contrôle direct, tandis que les boucles fonctionnelles favorisent une approche plus déclarative et expressive. Dans de nombreux cas, les boucles fonctionnelles peuvent aider à améliorer la lisibilité du code et à réduire les risques d'erreurs, en particulier lors du traitement de collections de données.
+
+
+
+exemple de code de cas de boucles natives pour une fonction de recherche 
+// Exemple de collection de recettes
+const recettes = [
+  { titre: 'Salade de tomates', ingredients: ['tomates', 'oignons', 'huile d'olive'], instructions: 'Mélanger les ingrédients et assaisonner.' },
+  { titre: 'Pâtes à la carbonara', ingredients: ['spaghetti', 'lardons', 'œufs', 'parmesan'], instructions: 'Faire cuire les pâtes, faire revenir les lardons, mélanger avec les œufs et le parmesan.' },
+  // ... autres recettes
+];
+
+// Fonction de recherche
+function rechercherRecettes(motCle) {
+  const résultats = [];
+  
+  // Parcourir les recettes et comparer les mots clés
+  for (let i = 0; i < recettes.length; i++) {
+    const recette = recettes[i];
+    
+    // Comparaison des mots clés
+    if (recette.titre.toLowerCase().includes(motCle.toLowerCase()) ||
+        recette.ingredients.some(ingrédient => ingrédient.toLowerCase().includes(motCle.toLowerCase())) ||
+        recette.instructions.toLowerCase().includes(motCle.toLowerCase())) {
+      résultats.push(recette);
+    }
+  }
+  
+  return résultats;
+}
+
+// Exemple d'utilisation de la fonction de recherche
+const motCle = 'salade';
+const résultats = rechercherRecettes(motCle);
+console.log(résultats);
+
+
+::::::::::::::::::::::::::::::::::::::
+
+exemple de boucles fonctionnelles pour un moteur de recherche 
+
+// Exemple de collection de recettes
+const recettes = [
+  { titre: 'Salade de tomates', ingredients: ['tomates', 'oignons', 'huile d'olive'], instructions: 'Mélanger les ingrédients et assaisonner.' },
+  { titre: 'Pâtes à la carbonara', ingredients: ['spaghetti', 'lardons', 'œufs', 'parmesan'], instructions: 'Faire cuire les pâtes, faire revenir les lardons, mélanger avec les œufs et le parmesan.' },
+  // ... autres recettes
+];
+
+// Fonction de recherche
+function rechercherRecettes(motCle) {
+  const résultats = recettes.filter(recette => 
+    recette.titre.toLowerCase().includes(motCle.toLowerCase()) ||
+    recette.ingredients.some(ingrédient => ingrédient.toLowerCase().includes(motCle.toLowerCase())) ||
+    recette.instructions.toLowerCase().includes(motCle.toLowerCase())
+  );
+  
+  return résultats;
+}
+
+// Exemple d'utilisation de la fonction de recherche
+const motCle = 'salade';
+const résultats = rechercherRecettes(motCle);
+console.log(résultats);
