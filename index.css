@@ -1,0 +1,11 @@
+
+.bg-img{
+    background-image : url("img/Recette01.jpg");
+    background-repeat : no-repeat;
+    background-position : center;
+    background-size: cover;
+    height : 500px;
+}
+option:hover{
+    background-color : yellow;
+}
