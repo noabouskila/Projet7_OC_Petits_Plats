@@ -1,6 +1,6 @@
 
 .bg-img{
-    background-image : url("img/Recette01.jpg");
+    background-image : url("img/logoBg.png");
     background-repeat : no-repeat;
     background-position : center;
     background-size: cover;
@@ -8,4 +8,11 @@
 }
 option:hover{
     background-color : yellow;
+}
+.sectionCard{
+    height: 650px;
+    width: 32%;
+    margin: 2% 0.5%;
+    box-shadow: lightgrey 1px 1px 11px 10px;
+    border-radius: 8px;
 }
