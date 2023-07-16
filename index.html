@@ -25,43 +25,84 @@
 
     <main class="bg-body-secondary">
         <section class="col-11 m-auto d-flex justify-content-between py-5">
-            <div>
-                <select name="ingredients" id="ingredients" class="me-4 py-2 border-0 rounded pe-4 ">
-                  
-                    <option value="">Ingredients</option>
-                    <option value="">Ingredients1</option>
-                    <option value="">Ingredients2</option>
-                    <option value="">Ingredients3</option>
-                </select>
-    
-                <select name="appareil" id="appareil" class="mx-4 p-2 border-0 rounded pe-4">
-                 
-                    <option value="">Appareil</option>
-                    <option value="">Appareil1</option>
-                    <option value="">Appareil2</option>
-                    <option value="">Appareil3</option>
-                </select>
-                
-                <select name="ustensils" id="ustentils" class="mx-4 py-2 border-0 rounded pe-4">
-                  
-                    <option value="">Ustentiles</option>
-                    <option value="">Ustentiles1</option>
-                    <option value="">Ustentiles2</option>
-                    <option value="">Ustentiles3</option>
-                </select>
+            <div class="d-flex justify-content-between w-75" id="filterContainer">
+
+                <!-- INGREDIENTS -->
+                <div class="filterBtn w-25">
+                    <div class="head">
+                        <label for="ingredients" class="form-label">Ingredients</label>
+                        <img src="img/chevron-down-solid.svg" alt="chevron bas ouvrir filtre" style="width: 5%;" class="chevron">
+                    </div>
+                    <div class="searchFilter">
+                        <div class="position-relative">
+                            <input type="text" class="form-control dataListInput" list="datalistOptionsIngr" id="ingredients" >
+                            <img src="img/magnifying-glass-solid.svg" class="searchIconGrey position-absolute" alt="search"  style=" right: 3%; top: 18px;">
+                        </div>
+                        
+                        <datalist id="datalistOptionsIngr" class="datalistOptions">
+                            <option value="San Francisco">
+                            <option value="New York">
+                            <option value="Seattle">
+                            <option value="Los Angeles">
+                            <option value="Chicago">
+                        </datalist>
+                    </div>
+                </div>
+
+
+                <!-- USTENILS -->
+                <div class="filterBtn w-25">
+                    <div class="head">
+                        <label for="Ustentiles" class="form-label">Ustentiles</label>
+                        <img src="img/chevron-down-solid.svg" alt="chevron bas ouvrir filtre" style="width: 5%;" class="chevron">
+                    </div>
+                    <div class="searchFilter">
+                        <div class="position-relative">
+                            <input type="text" class="form-control dataListInput" list="datalistOptionsUst" id="Ustentiles">
+                            <img src="img/magnifying-glass-solid.svg" class="searchIconGrey position-absolute" alt="search"  style=" right: 3%; top: 18px;">
+                        </div>
+                        
+                        <datalist id="datalistOptionsUst" class="datalistOptions">
+                            <option value="San Francisco">
+                            <option value="New York">
+                            <option value="Seattle">
+                            <option value="Los Angeles">
+                            <option value="Chicago">
+                        </datalist>
+                    </div>
+                </div>
+
+
+                <!-- APPAREILS -->
+                <div class="filterBtn w-25">
+                    <div class="head">
+                        <label for="Appareils" class="form-label">Appareils</label>
+                        <img src="img/chevron-down-solid.svg" alt="chevron bas ouvrir filtre" style="width: 5%;" class="chevron">
+                    </div>
+                    <div class="searchFilter">
+                        <div class="position-relative">
+                            <input type="text" class="form-control dataListInput" list="datalistOptionsApp" id="Appareils">
+                            <img src="img/magnifying-glass-solid.svg" class="searchIconGrey position-absolute" alt="search" style=" right: 3%; top: 18px;">
+                        </div>
+                        
+                        <datalist id="datalistOptionsApp" class="datalistOptions">
+                            <option value="San Francisco">
+                            <option value="New York">
+                            <option value="Seattle">
+                            <option value="Los Angeles">
+                            <option value="Chicago">
+                        </datalist>
+                    </div>
+                </div>
+
             </div>
 
-            <h3 class="fw-bold">1500 recettes</h3>
+            <h3 id="countRecipes" class="fw-bold"></h3>
             
         </section>
 
         
-        <section class="col-11 m-auto">
-            <div class="badge text-bg-warning  p-2"  style="width: 11%;">
-                <span>Crème de coco</span>
-                <img src="img/close.svg" alt="close button" style="width: 15px;">
-            </div>
-        </section> 
+        <section class="col-11 m-auto tags d-flex flex-wrap"></section> 
         
 
 

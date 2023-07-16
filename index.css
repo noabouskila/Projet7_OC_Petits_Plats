@@ -10,9 +10,100 @@ option:hover{
     background-color : yellow;
 }
 .sectionCard{
-    height: 650px;
-    width: 32%;
+    background : white;
+    width: 30%;
     margin: 2% 0.5%;
     box-shadow: lightgrey 1px 1px 11px 10px;
     border-radius: 8px;
+}
+
+.tag{
+    margin : 0% 1% 1% 0%;
+}
+.closeBtn{
+    cursor: pointer;
+}
+
+.tag:target {
+    display: none;
+}
+  
+
+
+
+
+/*  */
+
+.countRecettes{
+    padding-top: 1%;
+    padding-left: 3%;
+    font-family: "Impact";
+    font-weight: 400 ;
+    font-size: 21px;
+    white-space: nowrap;
+    padding-right: 10px;
+}
+#filterContainer {
+    /* display: flex;
+    gap: 10px;
+    margin-top: 2%;
+    margin-left: 5%;
+    margin-bottom: 2%;
+    flex-direction: row;
+    width: auto;  */
+}
+.filterBtn {
+    background-color: white;
+    /* color: black;
+    border: none;
+    padding: 5px 10px; */
+    border-radius:10px;
+    padding: 1%;
+    cursor: pointer;
+    font-weight: 500;
+    height: 50px;
+    overflow: hidden;
+}
+.filterBtn.open {
+height: auto;
+}
+
+.filterBtn .chevron {
+transition: transform 0.3s ease-in-out;
+}
+.head {
+display: flex;
+padding: 5px 10px;
+padding-top: 1%;
+padding-bottom: 1%;
+padding-left: 1%;
+justify-content: space-between;
+}
+.head h3 {
+font-size: 16px;
+font-weight: 500;
+}
+.filterBtn.open .chevron {
+position: relative;
+transform: rotate(180deg);
+bottom: 10px;
+}
+.searchFilter {
+margin-top: 10px;
+padding: 5px;
+border-radius: 4px;
+cursor: pointer;
+position: relative;
+}
+.searchFilter input[type="text"] {
+width: 100%;
+padding-right: 25px;
+}
+.searchIconGrey {
+position: absolute;
+top: 20px;
+right: 10px;
+transform: translateY(-50%);
+width: 20px;
+height: 20px;
 }
