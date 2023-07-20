@@ -17,7 +17,7 @@
         <div class="col-8 m-auto text-center d-flex flex-column justify-content-center h-75">
             <h1 class="text-warning">CHERCHEZ PARMI PLUS DE 1500 RECETTES DU QUOTIDIEN,SIMPLES ET DÉLICIEUSES</h1>
            <div class="position-relative">
-            <input type="text"  placeholder="Rechercher une recette, un ingrédient, ..." class="py-3 rounded w-100 border-0">
+            <input type="text" id="mainSearchEngine" placeholder="Rechercher une recette, un ingrédient, ..." class="py-3 rounded w-100 border-0">
             <img src="img/logoSearch.svg" alt="logo search" style="width: 5%;" class="position-absolute end-0 m-2 ">
            </div>
         </div>
@@ -50,7 +50,7 @@
                 </div>
 
 
-                <!-- USTENILS -->
+                <!-- USTENILES -->
                 <div class="filterBtn w-25">
                     <div class="head">
                         <label for="Ustentiles" class="form-label">Ustentiles</label>
@@ -97,15 +97,15 @@
 
             </div>
 
+            <!-- TOTAL DES RECETTES -->
             <h3 id="countRecipes" class="fw-bold"></h3>
             
         </section>
 
-        
+        <!-- affichage du tag ettiquette en jaune en dessous des filtres -->
         <section class="col-11 m-auto tags d-flex flex-wrap"></section> 
         
-
-
+        <!-- section d'affichage des cards -->
         <section id="sectionCards" class="col-11 m-auto py-5 d-flex justify-content-between flex-wrap">
             
           
