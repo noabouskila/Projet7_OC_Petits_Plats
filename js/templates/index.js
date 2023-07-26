@@ -19,11 +19,6 @@ const countRecipes = document.getElementById('countRecipes')
 let totalRecipes = 0
 
 
-// INSERTION INITIALE DES RECETTES
-// const sectionCards = document.getElementById('sectionCards')
-// const sectionCard = document.createElement("div")
-// sectionCard.classList.add("sectionCard")
-
 // console.log(recipes)
 function createRecipeCards(recipes) {
     recipes.forEach(recipe => {
@@ -32,7 +27,6 @@ function createRecipeCards(recipes) {
     });
 }
 createRecipeCards(recipes);
-
 
 
 // generer les cards
@@ -64,7 +58,7 @@ function createRecipeCard(recipe){
                                         ${ingredient.unit!== undefined ? ingredient.unit : "" }
                                     </span>
                                 </div>`
-                    })
+                    }).join(' ')
                 }
             </div>
         </div>
@@ -77,111 +71,6 @@ function createRecipeCard(recipe){
 // total du nombre de recettes affichées à l'ecran
 countRecipes.append(totalRecipes , " Recettes")
 
-
-// affichage du tag en etiquette jaune
-let dataListInputs = document.querySelectorAll(".dataListInput");
-// console.log(dataListInputs)
-
-dataListInputs.forEach(dataListInput => {
-    dataListInput.addEventListener("change", function() {
-        let selectedOption = dataListInput.value;
-        // console.log(selectedOption);
-
-        const tags = document.querySelector(".tags")
-        // console.log(tags)
-
-        const tag = document.createElement("div")
-        tag.classList.add('tag')
-        // console.log(tag)
-
-        tag.innerHTML = `
-        <div class="badge text-bg-warning  p-2">
-            <span>${selectedOption}</span>
-            <img src="img/close.svg" alt="close button" style="width: 15px;" class="closeBtn" onClick="closeBtn()">
-        </div>`
-       
-        tags.appendChild(tag) 
-        
-    });
-})
-
-// MARCHE BOF : EVENT EST DEPRECIE ET NE SE REAFFICHE PAS SI ON RECLIQUE SUR LE BOUTON 
-function closeBtn() {
-    var closeBtn = event.target;
-    var tagDiv = closeBtn.closest(".tag");
-    tagDiv.style.display = "none";
-}
-  
-
-
-
-// Moteur de recherche principal
-const mainSearchEngine = document.getElementById("mainSearchEngine")
-mainSearchEngine.addEventListener("change",searchRecipe)
-
-// fonction de recherche moteur de recherche principale
-function searchRecipe(e){
-    
-    // mot clé tapé par le user
-    let searchTerm = e.target.value.trim().replace(/\s+/g, ' ').toLowerCase()
-    console.log(searchTerm)
-
-    // verification  motclé > de 3 caracteres et  motclé valide
-    if(searchTerm.length !== '' && searchTerm.length >= 3 && validateEntry(searchTerm)){
-        console.log("+ que 3 caracteres")
-
-        // FONCTION FILTER : filterRecipe
-        const filterRecipe = recipes.filter(recipe =>{
-           const filterName = recipe.name.toLowerCase()
-           const filterDescription = recipe.description.toLowerCase()
-           const filterIngredient = recipe.ingredients.map(ingredient => ingredient.ingredient.toLowerCase());
-           
-           return filterName.includes(searchTerm) || filterDescription.includes(searchTerm) || filterIngredient.includes(searchTerm);
-        })
-        console.log(filterRecipe)
-
-        // affichage du contenu ET du nombre total de recettes
-        if (filterRecipe.length === 0) {
-            sectionCards.innerHTML = `Aucune recette ne contient '${searchTerm}'avec les éléments selctionnés. Vous pouvez chercher "tarte aux pommes", "poisson", etc.`;
-            countRecipes.innerHTML = `${filterRecipe.length} recettes`;
-        }
-        else{
-            updateRecipeDisplay(filterRecipe);
-        }
-        // let t1 = performance.now();
-        // console.log("L'appel a demandé " + (t1-t0)+ " ms.")
-
-    }
-    else{
-        console.log("- que 3 caracteres")
-        resetRecipeDisplay();
-    }
-
-}
-
-// Fonction pour l'affichage des recettes filtrées
-function updateRecipeDisplay(filterRecipe) {
-    sectionCards.innerHTML = "";
-    createRecipeCards(filterRecipe);
-    countRecipes.innerHTML = `${filterRecipe.length} recettes`;
-}
-
-// Fonction pour réinitialiser l'affichage des recettes
-function resetRecipeDisplay() {
-    sectionCards.innerHTML = "";
-    createRecipeCards(recipes);
-    countRecipes.innerHTML = `${recipes.length} recettes`;
-}
-
-//Fonction pour verifier les caractères non autorisés
-function validateEntry(str) {
-    var letters =
-      /[^a-zA-Z'áàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ ]+/;
-    if (str.match(letters)) {
-      return false;
-    }
-    return true;
-}
 
 
 
