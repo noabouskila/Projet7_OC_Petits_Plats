@@ -78,7 +78,7 @@ allAppliances.forEach((appliance) => {
   // console.log(dataListOptions)
 
   dataListOptions.forEach(dataListOption => {
-    console.log(dataListOption)
+    // console.log(dataListOption)
 
     dataListOption.addEventListener("click", function(e){
       
