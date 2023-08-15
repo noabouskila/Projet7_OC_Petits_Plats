@@ -68,74 +68,51 @@ allAppliances.forEach((appliance) => {
 
 //////////////////////////TAGS//////////////////////
 
-  // affichage du tag en etiquette jaune
 
-  //SOIT JE CIBLE L'INPUT : dataListInput
-  // let dataListInputs = document.querySelectorAll(".dataListInput");
+// Créez un tableau d'options pour chaque datalist
+const optionsArrayIngr = Array.from(datalistOptionsIngr.options);
+const optionsArrayUst = Array.from(datalistOptionsUst.options);
+const optionsArrayApp = Array.from(datalistOptionsApp.options);
 
-  // SOIT JE CIBLE LA DATALIST : datalistOptions
-  let dataListOptions = document.querySelectorAll(".datalistOptions option");
-  // console.log(dataListOptions)
+// Sélectionnez tous les inputs
+const dataListInputs = document.querySelectorAll(".dataListInput");
 
-  dataListOptions.forEach(dataListOption => {
-    // console.log(dataListOption)
+dataListInputs.forEach(dataListInput => {
+  dataListInput.addEventListener("input", function() {
+    const selectedOption = dataListInput.value.trim().toLowerCase();
+    console.log("selectedOption",selectedOption)
 
-    dataListOption.addEventListener("click", function(e){
-      
-      let selectedOption = e.target.value
-      console.log(selectedOption);
+    if (optionsArrayIngr.some(option => option.value.trim().toLowerCase() === selectedOption)) {
+      createTag(selectedOption);
+    } else if (optionsArrayUst.some(option => option.value.trim().toLowerCase() === selectedOption)) {
+      createTag(selectedOption);
+    } else if (optionsArrayApp.some(option => option.value.trim().toLowerCase() === selectedOption)) {
+      createTag(selectedOption);
+    }
+    else{
+      console.log("L'élément ", selectedOption, "n'est pas présent dans la liste d'options.");
+    }
+  });
+});
 
-      // DEBUT TAG CREATION
-      const tags = document.querySelector(".tags")
-      const tag = document.createElement("div")
-      tag.classList.add('tag')
-      tag.innerHTML = `
+
+function createTag(selectedOption) {
+  const tags = document.querySelector(".tags");
+  const tag = document.createElement("div");
+  tag.classList.add("tag");
+  tag.innerHTML = `
       <div class="badge text-bg-warning  p-2">
           <span>${selectedOption}</span>
           <img src="img/close.svg" alt="close button" style="width: 15px;" class="closeBtn" onClick="closeBtn()">
-      </div>`
-      tags.appendChild(tag) 
-      // FIN TAG CREATION
-
-    })
-  })
-
-
-// OU///////////////////////////////
-
-
-// dataListInputs.forEach(dataListInput => { // je liste sur les trois filtre
-
-//     dataListInput.addEventListener("input", function() {  // ici juste faire le filtre /!\ pas l'ajout du tag (ça se fait sur le click de l'option)
-//         let selectedOption = dataListInput.value;
-//         createTags(selectedOption)
-//     });
-
-    // creation de tag
-    // function createTags(selectedOption){
-    //     const tags = document.querySelector(".tags");
-    //     const tag = document.createElement("div");
-    //     tag.classList.add('tag');
-    //     let divE =   document.createElement('div');
-    //     let spanE =  document.createElement('span');
-    //     spanE.textContent = selectedOption;
-    //     let imgE =  document.createElement('img');
-    //     imgE.src ="img/close.svg";
-    //     imgE.addEventListener("click",closeBtn)
-    //     divE.appendChild(spanE)
-    //     divE.appendChild(imgE)
-    //     tag.appendChild(divE)
-    //     tags.appendChild(tag)
-    //     dataListInput.value = ""
-    // }
-// })
-
+      </div>`;
+  tags.appendChild(tag);
+}
 
 
 // MARCHE BOF : EVENT EST DEPRECIE ET NE SE REAFFICHE PAS SI ON RECLIQUE SUR LE BOUTON 
 function closeBtn() {
-    var closeBtn = event.target;
-    var tagDiv = closeBtn.closest(".tag");
-    tagDiv.style.display = "none";
+  var closeBtn = event.target;
+  var tagDiv = closeBtn.closest(".tag");
+  tagDiv.style.display = "none";
 }
   
