@@ -20,36 +20,7 @@ allIngredients.forEach((ingredient) => {
   const optionIngr = document.createElement("option");
   optionIngr.value = ingredient;
   datalistOptionsIngr.appendChild(optionIngr);
-
-  optionIngr.addEventListener("click" , function(){
-    createTags(optionIngr.value)
-  })
 });
-
-let dataListInputs = document.querySelectorAll(".dataListInput");
-
-dataListInputs.forEach(dataListInput => {
-    // creation de tag
-    function createTags(selectedOption){
-        // affichage du tag en etiquette jaune
-        
-        const tags = document.querySelector(".tags");
-        const tag = document.createElement("div");
-        tag.classList.add('tag');
-        let divE =   document.createElement('div');
-        let spanE =  document.createElement('span');
-        spanE.textContent = selectedOption;
-        let imgE =  document.createElement('img');
-        imgE.src ="img/close.svg";
-        imgE.addEventListener("click",closeBtn)
-        divE.appendChild(spanE)
-        divE.appendChild(imgE)
-        tag.appendChild(divE)
-        tags.appendChild(tag)
-        dataListInput.value = ""
-    }
-})
-
 
 //////////////////////USTENSILS /////////////////////////////////
 
@@ -97,33 +68,37 @@ allAppliances.forEach((appliance) => {
 
 //////////////////////////TAGS//////////////////////
 
+  // affichage du tag en etiquette jaune
 
-// affichage du tag en etiquette jaune
-// let dataListInputs = document.querySelectorAll(".dataListInput");
-// console.log(dataListInputs)
+  //SOIT JE CIBLE L'INPUT : dataListInput
+  // let dataListInputs = document.querySelectorAll(".dataListInput");
 
-// dataListInputs.forEach(dataListInput => {
-//     dataListInput.addEventListener("input", function() {
-//         let selectedOption = dataListInput.value;
-//         // console.log(selectedOption);
+  // SOIT JE CIBLE LA DATALIST : datalistOptions
+  let dataListOptions = document.querySelectorAll(".datalistOptions option");
+  // console.log(dataListOptions)
 
-//         const tags = document.querySelector(".tags")
-//         // console.log(tags)
+  dataListOptions.forEach(dataListOption => {
+    console.log(dataListOption)
 
-//         const tag = document.createElement("div")
-//         tag.classList.add('tag')
-//         // console.log(tag)
+    dataListOption.addEventListener("click", function(e){
+      
+      let selectedOption = e.target.value
+      console.log(selectedOption);
 
-//         tag.innerHTML = `
-//         <div class="badge text-bg-warning  p-2">
-//             <span>${selectedOption}</span>
-//             <img src="img/close.svg" alt="close button" style="width: 15px;" class="closeBtn" onClick="closeBtn()">
-//         </div>`
-       
-//         tags.appendChild(tag) 
-        
-//     });
-// })
+      // DEBUT TAG CREATION
+      const tags = document.querySelector(".tags")
+      const tag = document.createElement("div")
+      tag.classList.add('tag')
+      tag.innerHTML = `
+      <div class="badge text-bg-warning  p-2">
+          <span>${selectedOption}</span>
+          <img src="img/close.svg" alt="close button" style="width: 15px;" class="closeBtn" onClick="closeBtn()">
+      </div>`
+      tags.appendChild(tag) 
+      // FIN TAG CREATION
+
+    })
+  })
 
 
 // OU///////////////////////////////
@@ -136,7 +111,7 @@ allAppliances.forEach((appliance) => {
 //         createTags(selectedOption)
 //     });
 
-    // // creation de tag
+    // creation de tag
     // function createTags(selectedOption){
     //     const tags = document.querySelector(".tags");
     //     const tag = document.createElement("div");

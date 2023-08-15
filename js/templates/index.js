@@ -71,7 +71,3 @@ function createRecipeCard(recipe){
 // total du nombre de recettes affichées à l'ecran
 countRecipes.append(totalRecipes , " Recettes")
 
-
-
-
-
