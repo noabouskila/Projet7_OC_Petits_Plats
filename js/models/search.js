@@ -3,6 +3,7 @@
 const mainSearchEngine = document.getElementById("mainSearchEngine")
 mainSearchEngine.addEventListener("input",searchRecipe)
 let searchTerm =""
+let filterRecipe =""
 
 // fonction de recherche moteur de recherche principale
 function searchRecipe(){
@@ -17,7 +18,7 @@ function searchRecipe(){
         // console.log("+ que 3 caracteres")
 
         // FONCTION FILTER : filterRecipe
-        const filterRecipe = recipes.filter(recipe =>{
+         filterRecipe = recipes.filter(recipe =>{
            const filterName = recipe.name.toLowerCase()
            const filterDescription = recipe.description.toLowerCase()
            const filterIngredient = recipe.ingredients.map(ingredient => ingredient.ingredient.toLowerCase());
@@ -137,3 +138,5 @@ function updateOptions(optionsSet, datalist) {
         datalist.appendChild(option);
     });
 }
+
+
