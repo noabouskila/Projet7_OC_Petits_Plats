@@ -116,7 +116,7 @@ function createTag(selectedOption, index) {
   tag.innerHTML = `
       <div class="badge text-bg-warning  p-2">
           <span>${selectedOption}</span>
-          <img src="img/close.svg" alt="close button" style="width: 15px;" class="closeBtn" onClick="closeBtn()">
+          <img src="img/close.svg" alt="close button" style="width: 15px;" class="closeBtn" onClick="closeBtn(filterRecipe)">
       </div>`;
   tags.appendChild(tag);
 
@@ -143,7 +143,7 @@ let filteredRecipes = [];
 function updateFilteredRecipes(filterRecipe) {
   // Mettre à jour les recettes affichées avec les recettes filtrées par le moteur de recherche principal
   console.log("filterRecipe" ,filterRecipe)
-  console.log("recipes" , recipes)
+  // console.log("recipes" , recipes)
 
   // INGREDIENTS
   // si il ya des filtres ingredients selectionnés
@@ -222,31 +222,51 @@ function updateFilteredRecipes(filterRecipe) {
 
 
 // Effacer un filtre 
-function closeBtn() {
+function closeBtn(filterRecipe) {
+  console.log(filterRecipe)
+  // 1) selectionner element DOM tag et span
   const tagDiv = event.target.closest(".tag");
   const tagValue = tagDiv.querySelector("span").textContent;
 
+  // 2)  si le tag existe bien , le supprimer
   if (activeFiltersIngredients.includes(tagValue)) {
     const index = activeFiltersIngredients.indexOf(tagValue);
     if (index > -1) {
+      // supprime l'element du tableau
       activeFiltersIngredients.splice(index, 1);
     }
   } else if (activeFiltersUstensils.includes(tagValue)) {
     const index = activeFiltersUstensils.indexOf(tagValue);
     if (index > -1) {
+      // supprime l'element du tableau
       activeFiltersUstensils.splice(index, 1);
     }
   } else if (activeFiltersAppareils.includes(tagValue)) {
     const index = activeFiltersAppareils.indexOf(tagValue);
     if (index > -1) {
+      // supprime l'element du tableau
       activeFiltersAppareils.splice(index, 1);
     }
   }
 
-  // Mettre à jour les recettes affichées en fonction des filtres actifs restants
-  updateFilteredRecipes();
 
+  // 3) supprimer l'ettiquette tag
   tagDiv.remove();
+
+
+  // Mettre à jour les recettes affichées en fonction des filtres actifs restants
+  // updateFilteredRecipes(filterRecipe);
+
+  if(filterRecipe.length == 0){
+    console.log("je supprime SANS avoir touché au moteur de recherche principal")
+    updateRecipeDisplay(recipes)
+  }
+  else{
+    console.log("je supprime EN AYANT touché au moteur de recherche principal")
+    updateRecipeDisplay(filterRecipe)
+  }
+
+ 
 }
 
 
