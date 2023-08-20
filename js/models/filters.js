@@ -74,6 +74,11 @@ const optionsArrayIngr = Array.from(datalistOptionsIngr.options);
 const optionsArrayUst = Array.from(datalistOptionsUst.options);
 const optionsArrayApp = Array.from(datalistOptionsApp.options);
 
+// stocker les filtres actifs  / selectionnés:
+const activeFiltersUstensils = [];
+const activeFiltersIngredients = [];
+const activeFiltersAppareils = [];
+
 // Sélectionnez tous les inputs
 const dataListInputs = document.querySelectorAll(".dataListInput");
 
@@ -82,12 +87,17 @@ dataListInputs.forEach(dataListInput => {
     const selectedOption = dataListInput.value.trim().toLowerCase();
     console.log("selectedOption",selectedOption)
 
+    // si la valeur ecrite est egale a un des filtres des ingredients presents : creer Tag
     if (optionsArrayIngr.some(option => option.value.trim().toLowerCase() === selectedOption)) {
-      createTag(selectedOption);
-    } else if (optionsArrayUst.some(option => option.value.trim().toLowerCase() === selectedOption)) {
-      createTag(selectedOption);
-    } else if (optionsArrayApp.some(option => option.value.trim().toLowerCase() === selectedOption)) {
-      createTag(selectedOption);
+      createTag(selectedOption, 1);
+    } 
+    // si la valeur ecrite est egale a un des filtres des ustensils presents : creer Tag
+    else if (optionsArrayUst.some(option => option.value.trim().toLowerCase() === selectedOption)){
+      createTag(selectedOption , 2);
+    }
+    // si la valeur ecrite est egale a un des filtres des Appareils presents : creer Tag
+    else if (optionsArrayApp.some(option => option.value.trim().toLowerCase() === selectedOption)) {
+      createTag(selectedOption , 3);
     }
     else{
       console.log("L'élément ", selectedOption, "n'est pas présent dans la liste d'options.");
@@ -95,8 +105,10 @@ dataListInputs.forEach(dataListInput => {
   });
 });
 
+// Creation de tags  et affichages des recettes en fonction des tags
+function createTag(selectedOption, index) {
 
-function createTag(selectedOption) {
+  // 1) Creation de Tags
   const tags = document.querySelector(".tags");
   const tag = document.createElement("div");
   tag.classList.add("tag");
@@ -106,13 +118,80 @@ function createTag(selectedOption) {
           <img src="img/close.svg" alt="close button" style="width: 15px;" class="closeBtn" onClick="closeBtn()">
       </div>`;
   tags.appendChild(tag);
+
+  //2) Ajouter les filtres selectionnés dans leurs tableaux correspondants
+  if (index === 1) {
+    activeFiltersIngredients.push(selectedOption);
+  } else if (index === 2) {
+    activeFiltersUstensils.push(selectedOption);
+  } else if (index === 3) {
+    activeFiltersAppareils.push(selectedOption);
+  }
+  
+  // Mettre à jour les recettes affichées en fonction des filtres actifs
+  updateFilteredRecipes(selectedOption);
+}
+
+// let filteredRecipes = [];
+
+function updateFilteredRecipes() {
+  // Mettre à jour les recettes affichées avec les recettes filtrées par le moteur de recherche principal
+  filteredRecipes = searchRecipe({ target: { value: searchTerm } });
+
+  if (activeFiltersIngredients.length > 0) {
+    filteredRecipes = filteredRecipes.filter(recipe =>
+      activeFiltersIngredients.every(filter =>
+        recipe.ingredients.some(ingredient => ingredient.ingredient.toLowerCase() === filter)
+      )
+    );
+  }
+
+  if (activeFiltersUstensils.length > 0) {
+    filteredRecipes = filteredRecipes.filter(recipe =>
+      activeFiltersUstensils.every(filter =>
+        recipe.ustensils.some(ustensil => ustensil.toLowerCase() === filter)
+      )
+    );
+  }
+
+  if (activeFiltersAppareils.length > 0) {
+    filteredRecipes = filteredRecipes.filter(recipe =>
+      activeFiltersAppareils.includes(recipe.appliance.toLowerCase())
+    );
+  }
+
+  // Mettre à jour les recettes affichées avec les recettes filtrées
+  updateRecipeDisplay(filteredRecipes);
 }
 
 
-// MARCHE BOF : EVENT EST DEPRECIE ET NE SE REAFFICHE PAS SI ON RECLIQUE SUR LE BOUTON 
+// Effacer un filtre 
 function closeBtn() {
-  var closeBtn = event.target;
-  var tagDiv = closeBtn.closest(".tag");
-  tagDiv.style.display = "none";
+  const tagDiv = event.target.closest(".tag");
+  const tagValue = tagDiv.querySelector("span").textContent;
+
+  if (activeFiltersIngredients.includes(tagValue)) {
+    const index = activeFiltersIngredients.indexOf(tagValue);
+    if (index > -1) {
+      activeFiltersIngredients.splice(index, 1);
+    }
+  } else if (activeFiltersUstensils.includes(tagValue)) {
+    const index = activeFiltersUstensils.indexOf(tagValue);
+    if (index > -1) {
+      activeFiltersUstensils.splice(index, 1);
+    }
+  } else if (activeFiltersAppareils.includes(tagValue)) {
+    const index = activeFiltersAppareils.indexOf(tagValue);
+    if (index > -1) {
+      activeFiltersAppareils.splice(index, 1);
+    }
+  }
+
+  // Mettre à jour les recettes affichées en fonction des filtres actifs restants
+  updateFilteredRecipes();
+
+  tagDiv.remove();
 }
+
+
   

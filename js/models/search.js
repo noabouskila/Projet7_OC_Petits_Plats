@@ -2,13 +2,15 @@
 // Moteur de recherche principal
 const mainSearchEngine = document.getElementById("mainSearchEngine")
 mainSearchEngine.addEventListener("input",searchRecipe)
+let searchTerm =""
 
 // fonction de recherche moteur de recherche principale
-function searchRecipe(e){
+function searchRecipe(){
     
     // mot clé tapé par le user
-    let searchTerm = e.target.value.trim().replace(/\s+/g, ' ').toLowerCase()
-    // console.log(searchTerm)
+     searchTerm = document.querySelector('input[type="text"]').value.trim().replace(/\s+/g, ' ').toLowerCase();
+    // let searchTerm = e.target.value.trim().replace(/\s+/g, ' ').toLowerCase()
+    // console.log("searchTerm : " , searchTerm)
 
     // verification  motclé > de 3 caracteres et  motclé valide
     if(searchTerm.length !== '' && searchTerm.length >= 3 && validateEntry(searchTerm)){
