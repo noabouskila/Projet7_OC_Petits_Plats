@@ -100,7 +100,7 @@ dataListInputs.forEach(dataListInput => {
       createTag(selectedOption , 3);
     }
     else{
-      console.log("L'élément ", selectedOption, "n'est pas présent dans la liste d'options.");
+      // console.log("L'élément ", selectedOption, "n'est pas présent dans la liste d'options.");
     }
   });
 });
@@ -149,6 +149,7 @@ function updateFilteredRecipes(filterRecipe) {
   // si il ya des filtres ingredients selectionnés
   if (activeFiltersIngredients.length > 0) {
 
+    // INGREDIENTS
     // si l'utilisateur nest pas passsé par le moteur de recherche principal : filtrer a partir de toutes les 50 recettes
     if(filterRecipe.length == 0){
       console.log("l'utilisateur n'est pas passé par le moteur de recherche principal")
@@ -215,9 +216,11 @@ function updateFilteredRecipes(filterRecipe) {
    
   }
 
-
   // Mettre à jour les recettes affichées avec les recettes filtrées
   updateRecipeDisplay(filteredRecipes);
+
+  // adapter les filtres en fonction des recettes filtrées par les filtres avancés deja selectionnés
+  updateFilterLists(filteredRecipes)
 }
 
 

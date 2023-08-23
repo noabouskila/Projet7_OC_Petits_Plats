@@ -18,13 +18,13 @@ function searchRecipe(){
         // console.log("+ que 3 caracteres")
 
         // FONCTION FILTER : filterRecipe
-         filterRecipe = recipes.filter(recipe =>{
-           const filterName = recipe.name.toLowerCase()
-           const filterDescription = recipe.description.toLowerCase()
-           const filterIngredient = recipe.ingredients.map(ingredient => ingredient.ingredient.toLowerCase());
-        //    console.log(filterName)
-           
-           return filterName.includes(searchTerm) || filterDescription.includes(searchTerm) || filterIngredient.includes(searchTerm);
+        filterRecipe = recipes.filter(recipe =>{
+            const filterName = recipe.name.toLowerCase().split(' ')
+            const filterDescription = recipe.description.toLowerCase().split(' ')
+            const filterIngredient = recipe.ingredients.map(ingredient => ingredient.ingredient.toLowerCase());
+
+            return filterName.includes(searchTerm) || filterDescription.includes(searchTerm) || filterIngredient.includes(searchTerm);
+        
         })
         // console.log(filterRecipe)
 
