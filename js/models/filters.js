@@ -104,7 +104,7 @@ dataListInputs.forEach(dataListInput => {
     }
   });
 });
-
+let filtres = [];
 // Creation de tags  et affichages des recettes en fonction des tags
 function createTag(selectedOption, index) {
 
@@ -132,89 +132,116 @@ function createTag(selectedOption, index) {
     activeFiltersAppareils.push(selectedOption);
     // console.log(activeFiltersAppareils)
   }
+
+  
+  filtres.push({selectedOption,index});
   
   // Mettre à jour les recettes affichées en fonction des filtres actifs
-  updateFilteredRecipes(filterRecipe);
+  updateFilteredRecipes(filterRecipe,filtres);
 }
 
 let filteredRecipes = [];
 
 
-function updateFilteredRecipes(filterRecipe) {
+function updateFilteredRecipes(filterRecipe,filtres) {
   // Mettre à jour les recettes affichées avec les recettes filtrées par le moteur de recherche principal
   console.log("filterRecipe" ,filterRecipe)
-  // console.log("recipes" , recipes)
+  console.log("filtres" ,filtres)
+  // console.log("recipes" , recipes) 
+
+  filteredRecipes = filterRecipe.filter((recette)=> {
+    let recipeValide = false;
+    filtres.forEach((filtre)=>{
+      console.log(filtre)
+      if(filtre[1]==1){
+        recipeValide = recette.ingredients.some(ingredient => ingredient.ingredient.toLowerCase() === filtre)
+        console.log("ingredients",recipeValide)
+
+      }else if(filtre[1]==2){
+        recipeValide = recette.ustensils.some(ustensil => ustensil.toLowerCase() === filtre)
+
+      }else if(filtre[1]==3){
+        recipeValide = recette.appliance.includes(filtre)
+
+      }
+      
+    })
+    if(recipeValide){
+      return true;
+    }
+
+  })
 
   // INGREDIENTS
   // si il ya des filtres ingredients selectionnés
-  if (activeFiltersIngredients.length > 0) {
+  // if (activeFiltersIngredients.length > 0) {
 
-    // INGREDIENTS
-    // si l'utilisateur nest pas passsé par le moteur de recherche principal : filtrer a partir de toutes les 50 recettes
-    if(filterRecipe.length == 0){
-      console.log("l'utilisateur n'est pas passé par le moteur de recherche principal")
-      filteredRecipes = recipes.filter(recipe =>
-        activeFiltersIngredients.every(filter =>
-          recipe.ingredients.some(ingredient => ingredient.ingredient.toLowerCase() === filter)
-        )
-      );
-    }
-    else{
-      console.log("l'utilisateur est pas passé par le moteur de recherche principale")
-      filteredRecipes = filterRecipe.filter(recipe =>
-        activeFiltersIngredients.every(filter =>
-          recipe.ingredients.some(ingredient => ingredient.ingredient.toLowerCase() === filter)
-        )
-      );
-    }
+  //   // INGREDIENTS
+  //   // si l'utilisateur nest pas passsé par le moteur de recherche principal : filtrer a partir de toutes les 50 recettes
+  //   if(filterRecipe.length == 0){
+  //     console.log("l'utilisateur n'est pas passé par le moteur de recherche principal")
+  //     filteredRecipes = recipes.filter(recipe =>
+  //       activeFiltersIngredients.every(filter =>
+  //         recipe.ingredients.some(ingredient => ingredient.ingredient.toLowerCase() === filter)
+  //       )
+  //     );
+  //   }
+  //   else{
+  //     console.log("l'utilisateur est pas passé par le moteur de recherche principale")
+  //     filteredRecipes = filterRecipe.filter(recipe =>
+  //       activeFiltersIngredients.every(filter =>
+  //         recipe.ingredients.some(ingredient => ingredient.ingredient.toLowerCase() === filter)
+  //       )
+  //     );
+  //   }
     
-  }
+  // }
  
 
-  // USTENTILS
-  // si il ya des filtres ustentils selectionnés
-  if (activeFiltersUstensils.length > 0) {
+  // // USTENTILS
+  // // si il ya des filtres ustentils selectionnés
+  // if (activeFiltersUstensils.length > 0) {
 
-    // si l'utilisateur nest pas passsé par le moteur de recherche principal : filtrer a partir de toutes les 50 recettes
-    if(filterRecipe.length == 0){
-      console.log("l'utilisateur n'est pas passé par le moteur de recherche principal")
-      filteredRecipes = recipes.filter(recipe =>
-        activeFiltersUstensils.every(filter =>
-          recipe.ustensils.some(ustensil => ustensil.toLowerCase() === filter)
-        )
-      );
-    }
-    else{
-      console.log("l'utilisateur est pas passé par le moteur de recherche principale")
-      filteredRecipes = filterRecipe.filter(recipe =>
-        activeFiltersUstensils.every(filter =>
-          recipe.ustensils.some(ustensil => ustensil.toLowerCase() === filter)
-        )
-      );
-    }
+  //   // si l'utilisateur nest pas passsé par le moteur de recherche principal : filtrer a partir de toutes les 50 recettes
+  //   if(filterRecipe.length == 0){
+  //     console.log("l'utilisateur n'est pas passé par le moteur de recherche principal")
+  //     filteredRecipes = recipes.filter(recipe =>
+  //       activeFiltersUstensils.every(filter =>
+  //         recipe.ustensils.some(ustensil => ustensil.toLowerCase() === filter)
+  //       )
+  //     );
+  //   }
+  //   else{
+  //     console.log("l'utilisateur est pas passé par le moteur de recherche principale")
+  //     filteredRecipes = filterRecipe.filter(recipe =>
+  //       activeFiltersUstensils.every(filter =>
+  //         recipe.ustensils.some(ustensil => ustensil.toLowerCase() === filter)
+  //       )
+  //     );
+  //   }
     
-  }
+  // }
  
 
-  // APPAREILS
-  // si il ya des filtres appareils selectionnés
-  if (activeFiltersAppareils.length > 0) {
+  // // APPAREILS
+  // // si il ya des filtres appareils selectionnés
+  // if (activeFiltersAppareils.length > 0) {
 
-    // si l'utilisateur nest pas passsé par le moteur de recherche principal : filtrer a partir de toutes les 50 recettes
-    if(filterRecipe.length == 0){
-      console.log("l'utilisateur n'est pas passé par le moteur de recherche principal")
-      filteredRecipes = recipes.filter(recipe =>
-        activeFiltersAppareils.includes(recipe.appliance.toLowerCase())
-      );
-    }
-    else{
-      console.log("l'utilisateur est pas passé par le moteur de recherche principale")
-      filteredRecipes = filterRecipe.filter(recipe =>
-        activeFiltersAppareils.includes(recipe.appliance.toLowerCase())
-      );
-    }
+  //   // si l'utilisateur nest pas passsé par le moteur de recherche principal : filtrer a partir de toutes les 50 recettes
+  //   if(filterRecipe.length == 0){
+  //     console.log("l'utilisateur n'est pas passé par le moteur de recherche principal")
+  //     filteredRecipes = recipes.filter(recipe =>
+  //       activeFiltersAppareils.includes(recipe.appliance.toLowerCase())
+  //     );
+  //   }
+  //   else{
+  //     console.log("l'utilisateur est pas passé par le moteur de recherche principale")
+  //     filteredRecipes = filterRecipe.filter(recipe =>
+  //       activeFiltersAppareils.includes(recipe.appliance.toLowerCase())
+  //     );
+  //   }
    
-  }
+  // }
 
   // Mettre à jour les recettes affichées avec les recettes filtrées
   updateRecipeDisplay(filteredRecipes);
