@@ -73,15 +73,21 @@ const optionsArrayIngr = Array.from(datalistOptionsIngr.options);
 const optionsArrayUst = Array.from(datalistOptionsUst.options);
 const optionsArrayApp = Array.from(datalistOptionsApp.options);
 
-// stocker les filtres actifs  / selectionnés:
+// creation de tableau stockant le filtre selectionné trié par catégorie
 const activeFiltersUstensils = [];
 const activeFiltersIngredients = [];
 const activeFiltersAppareils = [];
+
+// creation de tableau stockant les filtres (tous les filtres)
+let filtres = [];
+// creation de tableau stockant les recettes filtrés par les filtres
+let filteredRecipes = [];
 
 
 // Sélectionnez tous les inputs
 const dataListInputs = document.querySelectorAll(".dataListInput");
 
+// appeler la cration de tag au click du filtre
 dataListInputs.forEach(dataListInput => {
   dataListInput.addEventListener("input", function() {
     const selectedOption = dataListInput.value.trim().toLowerCase();
@@ -104,7 +110,9 @@ dataListInputs.forEach(dataListInput => {
     }
   });
 });
-let filtres = [];
+
+
+
 // Creation de tags  et affichages des recettes en fonction des tags
 function createTag(selectedOption, index) {
 
@@ -124,53 +132,85 @@ function createTag(selectedOption, index) {
   //2) Ajouter les filtres selectionnés dans leurs tableaux correspondants
   if (index === 1) {
     activeFiltersIngredients.push(selectedOption);
-    // console.log(activeFiltersIngredients)
+    console.log("activeFiltersIngredients",activeFiltersIngredients)
   } else if (index === 2) {
     activeFiltersUstensils.push(selectedOption);
-    // console.log(activeFiltersUstensils)
+    console.log("activeFiltersUstensils",activeFiltersUstensils)
   } else if (index === 3) {
     activeFiltersAppareils.push(selectedOption);
-    // console.log(activeFiltersAppareils)
+    console.log("activeFiltersAppareils",activeFiltersAppareils)
   }
 
-  
+  // mettre tous les filtres confudus dans le tableau filtre avec son index
   filtres.push({selectedOption,index});
   
   // Mettre à jour les recettes affichées en fonction des filtres actifs
-  updateFilteredRecipes(filterRecipe,filtres);
+  // updateFilteredRecipes(filterRecipe,filtres);
+  // updateFilteredRecipes(filteredRecipes,filtres);
+  updateFilteredRecipes2();
+
+  console.log("filteredRecipes" ,filteredRecipes)
 }
 
-let filteredRecipes = [];
 
+// function updateFilteredRecipes(filterRecipe,filtres) {
 
-function updateFilteredRecipes(filterRecipe,filtres) {
   // Mettre à jour les recettes affichées avec les recettes filtrées par le moteur de recherche principal
-  console.log("filterRecipe" ,filterRecipe)
-  console.log("filtres" ,filtres)
-  // console.log("recipes" , recipes) 
+  // console.log("filtres" ,filtres)
 
-  filteredRecipes = filterRecipe.filter((recette)=> {
-    let recipeValide = false;
-    filtres.forEach((filtre)=>{
-      console.log(filtre)
-      if(filtre[1]==1){
-        recipeValide = recette.ingredients.some(ingredient => ingredient.ingredient.toLowerCase() === filtre)
-        console.log("ingredients",recipeValide)
+  // filteredRecipes = filterRecipe.filter((recette)=> {
+  //   let recipeValide = false;
+  //   filtres.forEach((filtre)=>{
+  //     console.log(filtre)
+  //     if(filtre[1]==1){
+  //       recipeValide = recette.ingredients.some(ingredient => ingredient.ingredient.toLowerCase() === filtre)
+  //       console.log("ingredients",recipeValide)
 
-      }else if(filtre[1]==2){
-        recipeValide = recette.ustensils.some(ustensil => ustensil.toLowerCase() === filtre)
+  //     }else if(filtre[1]==2){
+  //       recipeValide = recette.ustensils.some(ustensil => ustensil.toLowerCase() === filtre)
 
-      }else if(filtre[1]==3){
-        recipeValide = recette.appliance.includes(filtre)
+  //     }else if(filtre[1]==3){
+  //       recipeValide = recette.appliance.includes(filtre)
 
-      }
+  //     }
       
-    })
-    if(recipeValide){
-      return true;
-    }
+  //   })
+  //   if(recipeValide){
+  //     return true;
+  //   }
 
-  })
+  // })
+
+  // CODE DU PROF
+  // filtres.forEach((filtre)=>{
+
+  //   // si l'utilisateur nest pas passsé par le moteur de recherche principal : filtrer a partir de toutes les 50 recettes
+  //   if(filterRecipe.length == 0){
+  //     filteredRecipes = recipes.filter((recette)=>{     
+  //       if(filtre.index==1){      
+  //         return recette.ingredients.some(ingredient => ingredient.ingredient.toLowerCase() === filtre.selectedOption)
+  //       }else if(filtre.index==2){
+  //         return recette.ustensils.some(ustensil => ustensil.toLowerCase() === filtre.selectedOption)
+  //       }else if(filtre.index==3){
+  //         // return recette.appliance.includes(filtre)
+  //         return recette.appliance.includes(filtre.selectedOption.toLowerCase());
+  //       }
+  //     })
+  //   }
+  //   else{
+  //     // si l'utilisateur est pas passé par le moteur de recherche principal
+  //     filteredRecipes = filterRecipe.filter((recette)=>{     
+  //       if(filtre.index==1){      
+  //         return recette.ingredients.some(ingredient => ingredient.ingredient.toLowerCase() === filtre.selectedOption)
+  //       }else if(filtre.index==2){
+  //         return recette.ustensils.some(ustensil => ustensil.toLowerCase() === filtre.selectedOption)
+  //       }else if(filtre.index==3){
+  //         // return recette.appliance.includes(filtre)
+  //         return recette.appliance.includes(filtre.selectedOption);
+  //       }
+  //     })
+  //   }
+  // })
 
   // INGREDIENTS
   // si il ya des filtres ingredients selectionnés
@@ -187,7 +227,7 @@ function updateFilteredRecipes(filterRecipe,filtres) {
   //     );
   //   }
   //   else{
-  //     console.log("l'utilisateur est pas passé par le moteur de recherche principale")
+  //     console.log("l'utilisateur est pas passé par le moteur de recherche principal")
   //     filteredRecipes = filterRecipe.filter(recipe =>
   //       activeFiltersIngredients.every(filter =>
   //         recipe.ingredients.some(ingredient => ingredient.ingredient.toLowerCase() === filter)
@@ -219,7 +259,6 @@ function updateFilteredRecipes(filterRecipe,filtres) {
   //       )
   //     );
   //   }
-    
   // }
  
 
@@ -240,64 +279,109 @@ function updateFilteredRecipes(filterRecipe,filtres) {
   //       activeFiltersAppareils.includes(recipe.appliance.toLowerCase())
   //     );
   //   }
-   
   // }
 
   // Mettre à jour les recettes affichées avec les recettes filtrées
-  updateRecipeDisplay(filteredRecipes);
+  // updateRecipeDisplay(filteredRecipes);
+  // updateRecipeDisplay(filterRecipe);
 
   // adapter les filtres en fonction des recettes filtrées par les filtres avancés deja selectionnés
-  updateFilterLists(filteredRecipes)
-}
+  // updateFilterLists(filteredRecipes)
+  // updateFilterLists(filterRecipe)
+// }
 
 
-// Effacer un filtre 
-function closeBtn(filterRecipe) {
-  console.log(filterRecipe)
-  // 1) selectionner element DOM tag et span
+
+// Fonction closeBtn pour effacer un filtre
+function closeBtn() {
   const tagDiv = event.target.closest(".tag");
   const tagValue = tagDiv.querySelector("span").textContent;
 
-  // 2)  si le tag existe bien , le supprimer
+  // Retirer le filtre du tableau filtres
+  const filterToRemove = filtres.find(filter => filter.selectedOption === tagValue);
+  const filterIndex = filtres.indexOf(filterToRemove);
+  filtres.splice(filterIndex, 1);
+
+  // Retirer le filtre des tableaux de filtres actifs
   if (activeFiltersIngredients.includes(tagValue)) {
     const index = activeFiltersIngredients.indexOf(tagValue);
     if (index > -1) {
-      // supprime l'element du tableau
       activeFiltersIngredients.splice(index, 1);
     }
   } else if (activeFiltersUstensils.includes(tagValue)) {
     const index = activeFiltersUstensils.indexOf(tagValue);
     if (index > -1) {
-      // supprime l'element du tableau
       activeFiltersUstensils.splice(index, 1);
     }
   } else if (activeFiltersAppareils.includes(tagValue)) {
     const index = activeFiltersAppareils.indexOf(tagValue);
     if (index > -1) {
-      // supprime l'element du tableau
       activeFiltersAppareils.splice(index, 1);
     }
   }
 
-
-  // 3) supprimer l'ettiquette tag
+  // Supprimer l'élément DOM du tag
   tagDiv.remove();
 
-
   // Mettre à jour les recettes affichées en fonction des filtres actifs restants
-  // updateFilteredRecipes(filterRecipe);
-
-  if(filterRecipe.length == 0){
-    console.log("je supprime SANS avoir touché au moteur de recherche principal")
-    updateRecipeDisplay(recipes)
-  }
-  else{
-    console.log("je supprime EN AYANT touché au moteur de recherche principal")
-    updateRecipeDisplay(filterRecipe)
-  }
-
- 
+  updateFilteredRecipes2();
 }
 
+// Fonction pour mettre à jour les recettes filtrées
+function updateFilteredRecipes2() {
+  // Filtrer les recettes en fonction des filtres actifs
 
-  
+  // si il passse par le moteur de recherche principale 
+  if(filterRecipe == 0){
+    console.log("je NE passse PAS par le moteur de recherche principale")
+    console.log('filtre restant',filtres)
+
+    filteredRecipes = recipes.filter((recette) => {
+      return filtres.every((filtre) => {
+        console.log(recette.appliance.toLowerCase().includes(filtre.selectedOption))
+        if (filtre.index === 1) {
+          return recette.ingredients.some(
+            (ingredient) =>
+              ingredient.ingredient.toLowerCase() === filtre.selectedOption
+          );
+        } else if (filtre.index === 2) {
+          return recette.ustensils.some(
+            (ustensil) => ustensil.toLowerCase() === filtre.selectedOption
+          );
+        } else if (filtre.index === 3) {
+          return recette.appliance.toLowerCase().includes(filtre.selectedOption);
+        }
+      });
+    });
+    
+  }
+  // si il NE passse PAS par le moteur de recherche principale 
+  else{
+    console.log("je passse par le moteur de recherche principale ")
+    console.log('filtre restant',filtres)
+
+    filteredRecipes = filterRecipe.filter((recette) => {
+      return filtres.every((filtre) => {
+        if (filtre.index === 1) {
+          return recette.ingredients.some(
+            (ingredient) =>
+              ingredient.ingredient.toLowerCase() === filtre.selectedOption
+          );
+        } else if (filtre.index === 2) {
+          return recette.ustensils.some(
+            (ustensil) => ustensil.toLowerCase() === filtre.selectedOption
+          );
+        } else if (filtre.index === 3) {
+          // return recette.appliance.includes(filtre.selectedOption);
+          return recette.appliance.toLowerCase().includes(filtre.selectedOption);
+        }
+      });
+    });
+  }
+ 
+
+
+  // Mettre à jour l'affichage des recettes et des filtres
+  updateRecipeDisplay(filteredRecipes);
+  updateFilterLists(filteredRecipes);
+}
