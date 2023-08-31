@@ -7,6 +7,9 @@ let filterRecipe =""
 
 // fonction de recherche moteur de recherche principale
 function searchRecipe(){
+
+    // MESURER LA PERFORMANCE EN DEBUT DE FONCTION
+    const t0 = performance.now();
     
     // mot clé tapé par le user
      searchTerm = document.querySelector('input[type="text"]').value.trim().replace(/\s+/g, ' ').toLowerCase();
@@ -30,7 +33,7 @@ function searchRecipe(){
             //  return filterName.includes(searchTerm) || filterDescription.find(word => word === searchTerm) || filterIngredient.includes(searchTerm);
         
         })
-        console.log("filterRecipe dans search.js" , filterRecipe)
+        // console.log("filterRecipe dans search.js" , filterRecipe)
 
         // affichage du contenu ET du nombre total de recettes
         if (filterRecipe.length === 0) {
@@ -47,6 +50,10 @@ function searchRecipe(){
         resetRecipeDisplay();
         resetFilterList();
     }  
+
+    // MESURER LA PERFORMANCE EN FIN DE FONCTION
+    const t1 = performance.now();
+    console.log("Temps écoulé pour la fonction de Recherche Principale " + (t1-t0)+ " ms.")
 }
 
 // Fonction pour l'affichage des recettes filtrées
