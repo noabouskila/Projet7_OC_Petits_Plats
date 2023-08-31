@@ -86,7 +86,7 @@ function searchRecipe(){
 
     // MESURER LA PERFORMANCE EN FIN DE FONCTION
     const t1 = performance.now();
-    console.log("Temps écoulé pour la fonction de Recherche Principale " + (t1-t0)+ " ms.")
+    console.log("Temps écoulé " + (t1-t0)+ " ms.")
 
     return filterRecipe;
 }
@@ -239,5 +239,4 @@ function updateOptions(optionsSet, datalist) {
         datalist.appendChild(option);
     }
 }
-
 
