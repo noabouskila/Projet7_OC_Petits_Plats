@@ -13,7 +13,6 @@ const allIngredients = recipes.reduce((ingredients, recipe) => {
     return ingredients;
 }, []);
 
-// console.log(allIngredients)
 
 // Parcourir le tableau d'ingrédients et créer une option pour chaque ingrédient
 allIngredients.forEach((ingredient) => {
@@ -36,7 +35,6 @@ const allUstensils = recipes.reduce((ustensils, recipe) => {
     return ustensils;
 }, []);
 
-// console.log(allUstensils)
 
 // Parcourir le tableau d'ingrédients et créer une option pour chaque ingrédient
 allUstensils.forEach((ustensil) => {
@@ -57,7 +55,6 @@ const allAppliances = recipes.reduce((appliances, recipe) => {
     return appliances;
 }, []);
 
-// console.log(allAppliances)
 
 // Parcourir le tableau d'ingrédients et créer une option pour chaque ingrédient
 allAppliances.forEach((appliance) => {
@@ -90,34 +87,6 @@ let filteredRecipes = [];
 
 // Sélectionnez tous les inputs
 const dataListInputs = document.querySelectorAll(".dataListInput");
-
-// appeler la creation de tag au click du filtre
-// dataListInputs.forEach(dataListInput => {
-//   dataListInput.addEventListener("input", function() {
-//     const selectedOption = dataListInput.value.trim().toLowerCase();
-//     // console.log("selectedOption",selectedOption)
-
-//     // si la valeur ecrite est egale a un des filtres des ingredients presents : creer Tag
-//     if (optionsArrayIngr.some(option => option.value.trim().toLowerCase() === selectedOption)) {
-//       createTag(selectedOption, 1);
-//     } 
-//     // si la valeur ecrite est egale a un des filtres des ustensils presents : creer Tag
-//     else if (optionsArrayUst.some(option => option.value.trim().toLowerCase() === selectedOption)){
-//       createTag(selectedOption , 2);
-//     }
-//     // si la valeur ecrite est egale a un des filtres des Appareils presents : creer Tag
-//     else if (optionsArrayApp.some(option => option.value.trim().toLowerCase() === selectedOption)) {
-//       createTag(selectedOption , 3);
-//     }
-//     else{
-//       // console.log("L'élément ", selectedOption, "n'est pas présent dans la liste d'options.");
-//     }
-//   });
-// });
-
-
-// DEBUT TEST 
-
 const datalistOptions = document.querySelectorAll(".datalistOptions")
 
 datalistOptions.forEach(datalistOption => {
@@ -139,11 +108,6 @@ datalistOptions.forEach(datalistOption => {
     }
   });
 });
-
-// console.log(datalistOptions)
-// FIN TEST
-
-
 
 
 // Creation de tags  et affichages des recettes en fonction des tags

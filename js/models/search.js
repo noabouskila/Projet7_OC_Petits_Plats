@@ -13,9 +13,7 @@ function searchRecipe(){
     const t0 = performance.now();
     
     // mot clé tapé par le user
-     searchTerm = document.querySelector('input[type="text"]').value.trim().replace(/\s+/g, ' ').toLowerCase();
-    // let searchTerm = e.target.value.trim().replace(/\s+/g, ' ').toLowerCase()
-    // console.log("searchTerm : " , searchTerm)
+    searchTerm = document.querySelector('input[type="text"]').value.trim().replace(/\s+/g, ' ').toLowerCase();
 
     // verification  motclé > de 3 caracteres et  motclé valide
     if(searchTerm.length !== '' && searchTerm.length >= 3 && validateEntry(searchTerm)){
@@ -25,16 +23,11 @@ function searchRecipe(){
         filterRecipe = recipes.filter(recipe =>{
             const filterName = recipe.name.toLowerCase()
             const filterDescription = recipe.description.toLowerCase()
-            // .split(' ')
-            // console.log("filterDescription" ,filterDescription)
             const filterIngredient = recipe.ingredients.map(ingredient => ingredient.ingredient.toLowerCase());
 
             return filterName.includes(searchTerm) || filterDescription.includes(searchTerm) || filterIngredient.includes(searchTerm);
-
-            //  return filterName.includes(searchTerm) || filterDescription.find(word => word === searchTerm) || filterIngredient.includes(searchTerm);
         
         })
-        // console.log("filterRecipe dans search.js" , filterRecipe)
 
         // affichage du contenu ET du nombre total de recettes
         if (filterRecipe.length === 0) {
@@ -54,7 +47,7 @@ function searchRecipe(){
 
     // MESURER LA PERFORMANCE EN FIN DE FONCTION
     const t1 = performance.now();
-    console.log("Temps écoulé pour la fonction de Recherche Principale " + (t1-t0)+ " ms.")
+    console.log("Temps écoulé  " + (t1-t0)+ " ms.")
 }
 
 // Fonction pour l'affichage des recettes filtrées

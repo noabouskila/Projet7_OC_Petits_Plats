@@ -72,13 +72,6 @@ function createRecipeCard(recipe){
 countRecipes.append(totalRecipes , " Recettes")
 
 
-
-
-
-
-
-
-
 // FONCTIONS POUR QUE LA BALISE DATALIST FONCTIONNE MEME AVEC LE CHANGEMENT DE CSS
 
 // Selection des input de chaque filtre 
