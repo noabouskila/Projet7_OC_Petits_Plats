@@ -4,7 +4,7 @@ console.log("VERSION FONCTIONNELLE")
 const mainSearchEngine = document.getElementById("mainSearchEngine")
 mainSearchEngine.addEventListener("input",searchRecipe)
 let searchTerm =""
-let filterRecipe =""
+let filterRecipe =[]
 
 // fonction de recherche moteur de recherche principale
 function searchRecipe(){
