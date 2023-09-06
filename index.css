@@ -28,9 +28,6 @@ option:hover{
     display: none;
 }
 
-
-/*  */
-
 .countRecettes{
     padding-top: 1%;
     padding-left: 3%;
@@ -40,22 +37,11 @@ option:hover{
     white-space: nowrap;
     padding-right: 10px;
 }
-#filterContainer {
-    /* display: flex;
-    gap: 10px;
-    margin-top: 2%;
-    margin-left: 5%;
-    margin-bottom: 2%;
-    flex-direction: row;
-    width: auto;  */
-}
+
 .filterBtn {
     background-color: white;
-    /* color: black;
-    border: none;
-    padding: 5px 10px; */
     border-radius:10px;
-    padding: 1%;
+    /* padding: 1%; */
     cursor: pointer;
     font-weight: 500;
     height: 50px;
@@ -83,11 +69,11 @@ font-weight: 500;
 .filterBtn.open .chevron {
 position: relative;
 transform: rotate(180deg);
-bottom: 10px;
+bottom: 2px;
 }
 .searchFilter {
-margin-top: 10px;
-padding: 5px;
+/* margin-top: 10px;
+padding: 5px; */
 border-radius: 4px;
 cursor: pointer;
 position: relative;
@@ -104,3 +90,32 @@ transform: translateY(-50%);
 width: 20px;
 height: 20px;
 }
+
+
+
+/* DATALIST */
+
+datalist {
+    position: relative;
+    /* width: 100%; */
+    width: 122%;
+    padding: 1px;
+    max-height: 10rem;
+    overflow : overlay;
+    
+}
+
+option {
+    background-color: white;
+    padding: 3px;
+    color: black;
+    margin-bottom: 1px;
+    font-size: 70%;
+    cursor: pointer;
+    white-space: normal;
+}
+  
+option:hover,  .active{
+    background-color: #FFD15B;
+    ;
+  }

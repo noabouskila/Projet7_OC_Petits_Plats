@@ -92,6 +92,7 @@ function resetFilterList(){
     allAppliances.forEach(appliance => {
         const option = document.createElement("option");
         option.value = appliance;
+        option.textContent = appliance;
         datalistOptionsApp.appendChild(option);
     });
 
@@ -99,6 +100,7 @@ function resetFilterList(){
     allIngredients.forEach(ingredient => {
         const option = document.createElement("option");
         option.value = ingredient;
+        option.textContent = ingredient;
         datalistOptionsIngr.appendChild(option);
     });
 
@@ -106,6 +108,7 @@ function resetFilterList(){
     allUstensils.forEach(ustensil => {
         const option = document.createElement("option");
         option.value = ustensil;
+        option.textContent = ustensil;
         datalistOptionsUst.appendChild(option);
     });
 
@@ -146,6 +149,7 @@ function updateOptions(optionsSet, datalist) {
     optionsSet.forEach(optionValue => {
         const option = document.createElement("option");
         option.value = optionValue;
+        option.textContent = optionValue;
         datalist.appendChild(option);
     });
 }
