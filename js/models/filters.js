@@ -1,3 +1,5 @@
+
+
 // Selectionner les datalists
 const datalistOptionsIngr = document.getElementById("datalistOptionsIngr");
 const datalistOptionsUst = document.getElementById("datalistOptionsUst");
@@ -7,7 +9,7 @@ const datalistOptionsApp = document.getElementById("datalistOptionsApp");
 const allIngredients = recipes.reduce((ingredients, recipe) => {
     recipe.ingredients.forEach((ingredient) => {
         if (!ingredients.includes(ingredient.ingredient)) {
-        ingredients.push(ingredient.ingredient);
+        ingredients.push(ingredient.ingredient);datalistOptionsIngr
         }
     });
     return ingredients;
@@ -19,8 +21,10 @@ const allIngredients = recipes.reduce((ingredients, recipe) => {
 allIngredients.forEach((ingredient) => {
   const optionIngr = document.createElement("option");
   optionIngr.value = ingredient;
+  optionIngr.textContent = ingredient;
   datalistOptionsIngr.appendChild(optionIngr);
 });
+
 
 //////////////////////USTENSILS /////////////////////////////////
 
@@ -40,6 +44,7 @@ const allUstensils = recipes.reduce((ustensils, recipe) => {
 allUstensils.forEach((ustensil) => {
   const optionUst = document.createElement("option");
   optionUst.value = ustensil;
+  optionUst.textContent = ustensil;
   datalistOptionsUst.appendChild(optionUst);
 });
 
@@ -60,9 +65,9 @@ const allAppliances = recipes.reduce((appliances, recipe) => {
 allAppliances.forEach((appliance) => {
   const optionApp = document.createElement("option");
   optionApp.value = appliance;
+  optionApp.textContent = appliance;
   datalistOptionsApp.appendChild(optionApp);
 });
-
 
 
 //////////////////////////TAGS//////////////////////
@@ -72,6 +77,7 @@ allAppliances.forEach((appliance) => {
 const optionsArrayIngr = Array.from(datalistOptionsIngr.options);
 const optionsArrayUst = Array.from(datalistOptionsUst.options);
 const optionsArrayApp = Array.from(datalistOptionsApp.options);
+
 
 // creation de tableau stockant le filtre selectionné trié par catégorie
 const activeFiltersUstensils = [];
@@ -87,29 +93,58 @@ let filteredRecipes = [];
 // Sélectionnez tous les inputs
 const dataListInputs = document.querySelectorAll(".dataListInput");
 
-// appeler la cration de tag au click du filtre
-dataListInputs.forEach(dataListInput => {
-  dataListInput.addEventListener("input", function() {
-    const selectedOption = dataListInput.value.trim().toLowerCase();
-    // console.log("selectedOption",selectedOption)
+// appeler la creation de tag au click du filtre
+// dataListInputs.forEach(dataListInput => {
+//   dataListInput.addEventListener("input", function() {
+//     const selectedOption = dataListInput.value.trim().toLowerCase();
+//     // console.log("selectedOption",selectedOption)
 
-    // si la valeur ecrite est egale a un des filtres des ingredients presents : creer Tag
-    if (optionsArrayIngr.some(option => option.value.trim().toLowerCase() === selectedOption)) {
-      createTag(selectedOption, 1);
-    } 
-    // si la valeur ecrite est egale a un des filtres des ustensils presents : creer Tag
-    else if (optionsArrayUst.some(option => option.value.trim().toLowerCase() === selectedOption)){
-      createTag(selectedOption , 2);
-    }
-    // si la valeur ecrite est egale a un des filtres des Appareils presents : creer Tag
-    else if (optionsArrayApp.some(option => option.value.trim().toLowerCase() === selectedOption)) {
-      createTag(selectedOption , 3);
-    }
-    else{
-      // console.log("L'élément ", selectedOption, "n'est pas présent dans la liste d'options.");
+//     // si la valeur ecrite est egale a un des filtres des ingredients presents : creer Tag
+//     if (optionsArrayIngr.some(option => option.value.trim().toLowerCase() === selectedOption)) {
+//       createTag(selectedOption, 1);
+//     } 
+//     // si la valeur ecrite est egale a un des filtres des ustensils presents : creer Tag
+//     else if (optionsArrayUst.some(option => option.value.trim().toLowerCase() === selectedOption)){
+//       createTag(selectedOption , 2);
+//     }
+//     // si la valeur ecrite est egale a un des filtres des Appareils presents : creer Tag
+//     else if (optionsArrayApp.some(option => option.value.trim().toLowerCase() === selectedOption)) {
+//       createTag(selectedOption , 3);
+//     }
+//     else{
+//       // console.log("L'élément ", selectedOption, "n'est pas présent dans la liste d'options.");
+//     }
+//   });
+// });
+
+
+// DEBUT TEST 
+
+const datalistOptions = document.querySelectorAll(".datalistOptions")
+
+datalistOptions.forEach(datalistOption => {
+  datalistOption.addEventListener("click", function (event) {
+    const opt = event.target;
+    if (opt.tagName === "OPTION") {
+      const selectedOption = opt.value.trim().toLowerCase();
+      console.log("selectedOption", selectedOption);
+
+      if (optionsArrayIngr.some(option => option.value.trim().toLowerCase() === selectedOption)) {
+        createTag(selectedOption, 1);
+      } else if (optionsArrayUst.some(option => option.value.trim().toLowerCase() === selectedOption)){
+        createTag(selectedOption , 2);
+      } else if (optionsArrayApp.some(option => option.value.trim().toLowerCase() === selectedOption)) {
+        createTag(selectedOption , 3);
+      } else {
+        // L'élément n'est pas présent dans la liste d'options.
+      }
     }
   });
 });
+
+// console.log(datalistOptions)
+// FIN TEST
+
 
 
 
@@ -145,8 +180,6 @@ function createTag(selectedOption, index) {
   filtres.push({selectedOption,index});
   
   // Mettre à jour les recettes affichées en fonction des filtres actifs
-  // updateFilteredRecipes(filterRecipe,filtres);
-  // updateFilteredRecipes(filteredRecipes,filtres);
   updateFilteredRecipes();
 
   console.log("filteredRecipes" ,filteredRecipes)

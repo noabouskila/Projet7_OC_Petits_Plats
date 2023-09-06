@@ -135,6 +135,7 @@ function resetFilterList(){
     // allIngredients.forEach(ingredient => {
     //     const option = document.createElement("option");
     //     option.value = ingredient;
+    //     option.textContent = ingredient;
     //     datalistOptionsIngr.appendChild(option);
     // });
 
@@ -142,6 +143,7 @@ function resetFilterList(){
     // allUstensils.forEach(ustensil => {
     //     const option = document.createElement("option");
     //     option.value = ustensil;
+    //     option.textContent = ustensil;
     //     datalistOptionsUst.appendChild(option);
     // });
 
@@ -153,6 +155,7 @@ function resetFilterList(){
         const appliance = allAppliances[i];
         const option = document.createElement("option");
         option.value = appliance;
+        option.textContent = appliance;
         datalistOptionsApp.appendChild(option);
     }
     // 3) remettre le tableaux de filtres : allIngredients dans les filtres
@@ -160,6 +163,7 @@ function resetFilterList(){
         const ingredient = allIngredients[i];
         const option = document.createElement("option");
         option.value = ingredient;
+        option.textContent = ingredient;
         datalistOptionsIngr.appendChild(option);
     }
     // 4) remettre le tableaux de filtres : allUstensils dans les filtres
@@ -167,6 +171,7 @@ function resetFilterList(){
         const ustensil = allUstensils[i];
         const option = document.createElement("option");
         option.value = ustensil;
+        option.textContent = ustensil;
         datalistOptionsUst.appendChild(option);
     }
 
@@ -228,6 +233,7 @@ function updateOptions(optionsSet, datalist) {
     // optionsSet.forEach(optionValue => {
     //     const option = document.createElement("option");
     //     option.value = optionValue;
+    //     option.textContent = optionValue;
     //     datalist.appendChild(option);
     // });
 
@@ -236,6 +242,7 @@ function updateOptions(optionsSet, datalist) {
     for (const optionValue of optionsSet) {
         const option = document.createElement("option");
         option.value = optionValue;
+        option.textContent = optionValue;
         datalist.appendChild(option);
     }
 }
