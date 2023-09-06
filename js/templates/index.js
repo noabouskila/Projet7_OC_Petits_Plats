@@ -1,6 +1,3 @@
-
-
-
 // GESTION CHEVRONS FILTRES 
 
 // Sélectionnez tous les chevrons des filtres
@@ -70,16 +67,8 @@ function createRecipeCard(recipe){
     sectionCards.appendChild(sectionCard)
 }
 
-
 // total du nombre de recettes affichées à l'ecran
 countRecipes.append(totalRecipes , " Recettes")
-
-
-
-
-
-
-
 
 
 // FONCTIONS POUR QUE LA BALISE DATALIST FONCTIONNE MEME AVEC LE CHANGEMENT DE CSS

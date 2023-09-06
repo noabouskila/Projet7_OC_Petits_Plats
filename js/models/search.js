@@ -1,4 +1,4 @@
-
+console.log("VERSION NATIVE")
 // Moteur de recherche principal
 const mainSearchEngine = document.getElementById("mainSearchEngine")
 mainSearchEngine.addEventListener("input",searchRecipe)
@@ -12,34 +12,13 @@ function searchRecipe(){
     const t0 = performance.now();
     
     // mot clé tapé par le user
-     searchTerm = document.querySelector('input[type="text"]').value.trim().replace(/\s+/g, ' ').toLowerCase();
-    // let searchTerm = e.target.value.trim().replace(/\s+/g, ' ').toLowerCase()
-    // console.log("searchTerm : " , searchTerm)
+    searchTerm = document.querySelector('input[type="text"]').value.trim().replace(/\s+/g, ' ').toLowerCase();
 
     // verification  motclé > de 3 caracteres et  motclé valide
     if(searchTerm.length !== '' && searchTerm.length >= 3 && validateEntry(searchTerm)){
         // console.log("+ que 3 caracteres")
 
-        // // FONCTION FILTER : filterRecipe
-        // filterRecipe = recipes.filter(recipe =>{
-        //     const filterName = recipe.name.toLowerCase()
-        //     const filterDescription = recipe.description.toLowerCase()
-        //     // .split(' ')
-        //     // console.log("filterDescription" ,filterDescription)
-        //     const filterIngredient = recipe.ingredients.map(ingredient => ingredient.ingredient.toLowerCase());
-
-        //     return filterName.includes(searchTerm) || filterDescription.includes(searchTerm) || filterIngredient.includes(searchTerm);
-
-        //     //  return filterName.includes(searchTerm) || filterDescription.find(word => word === searchTerm) || filterIngredient.includes(searchTerm);
-        
-        // })
-        // console.log("filterRecipe dans search.js" , filterRecipe)
-
-
-
-
         // FONCTION NATIVE 
-        
         // Réinitialisation du tableau à chaque nouvelle recherche du onChange
         filterRecipe = []
 
@@ -123,33 +102,7 @@ function resetFilterList(){
     datalistOptionsIngr.innerHTML = ""
     datalistOptionsUst.innerHTML= ""
     
-
-    // // 2) remettre le tableaux de filtres : allAppliances dans les filtres
-    // allAppliances.forEach(appliance => {
-    //     const option = document.createElement("option");
-    //     option.value = appliance;
-    //     datalistOptionsApp.appendChild(option);
-    // });
-
-    // // 3) remettre le tableaux de filtres : allIngredients dans les filtres
-    // allIngredients.forEach(ingredient => {
-    //     const option = document.createElement("option");
-    //     option.value = ingredient;
-    //     option.textContent = ingredient;
-    //     datalistOptionsIngr.appendChild(option);
-    // });
-
-    // // 4) remettre le tableaux de filtres : allUstensils dans les filtres
-    // allUstensils.forEach(ustensil => {
-    //     const option = document.createElement("option");
-    //     option.value = ustensil;
-    //     option.textContent = ustensil;
-    //     datalistOptionsUst.appendChild(option);
-    // });
-
-
     // VERSION NATIVE
-
     //  2) remettre le tableaux de filtres : allAppliances dans les filtres
     for (let i = 0; i < allAppliances.length; i++) {
         const appliance = allAppliances[i];
@@ -184,18 +137,9 @@ function updateFilterLists(filterRecipe){
     const uniqueIngredients = new Set();
     const uniqueUstensils = new Set();
     const uniqueAppliances = new Set();
-    
-
-    // 2) parcourir tous les ingredients , appliance et ustensils des recette filtrées pour LES AJOUTER (add) DANS LES TABLEAUX A VALEURS UNIQUES (new Set)
-    // filterRecipe.forEach(recipe => {
-    //     recipe.ingredients.forEach(ingredient => uniqueIngredients.add(ingredient.ingredient.toLowerCase()));
-    //     recipe.ustensils.forEach(ustensil => uniqueUstensils.add(ustensil.toLowerCase()));
-    //     uniqueAppliances.add(recipe.appliance.toLowerCase());
-    // });
 
 
     // VERSION NATIVE
-
     // 2) parcourir tous les ingredients , appliance et ustensils des recette filtrées pour LES AJOUTER (add) DANS LES TABLEAUX A VALEURS UNIQUES (new Set)
 
     for (let i = 0; i < filterRecipe.length; i++) {
@@ -228,15 +172,6 @@ function updateFilterLists(filterRecipe){
 function updateOptions(optionsSet, datalist) {
     // A) vider les filtres de base
     datalist.innerHTML = "";
-
-    // // B) pour chaque ingredients/utensil/appareil du tableau de filtre mis a jour , creer une option 
-    // optionsSet.forEach(optionValue => {
-    //     const option = document.createElement("option");
-    //     option.value = optionValue;
-    //     option.textContent = optionValue;
-    //     datalist.appendChild(option);
-    // });
-
 
     // VERSION NATIVE
     for (const optionValue of optionsSet) {
