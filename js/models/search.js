@@ -1,3 +1,4 @@
+console.log("VERSION FONCTIONNELLE")
 
 // Moteur de recherche principal
 const mainSearchEngine = document.getElementById("mainSearchEngine")
