@@ -110,6 +110,7 @@ datalistOptions.forEach(datalistOption => {
         // L'élément n'est pas présent dans la liste d'options.
       }
     }
+
   });
 });
 

@@ -18,7 +18,7 @@ option:hover{
 }
 
 .tag{
-    margin : 0% 1% 1% 0%;
+    margin : 1.5% 1% 1% 0%;
 }
 .closeBtn{
     cursor: pointer;
@@ -38,6 +38,10 @@ option:hover{
     padding-right: 10px;
 }
 
+#loupe{
+    cursor : pointer
+}
+/* FILTRES */
 .filterBtn {
     background-color: white;
     border-radius:10px;
@@ -48,7 +52,7 @@ option:hover{
     overflow: hidden;
 }
 .filterBtn.open {
-height: auto;
+    height: auto;
 }
 
 .filterBtn .chevron {
@@ -110,9 +114,10 @@ option {
     padding: 3px;
     color: black;
     margin-bottom: 1px;
-    font-size: 70%;
     cursor: pointer;
     white-space: normal;
+    font-size: 100%;
+    padding-left: 10%;
 }
   
 option:hover,  .active{

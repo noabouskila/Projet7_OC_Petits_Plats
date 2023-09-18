@@ -1,4 +1,5 @@
-console.log("VERSION NATIVE")
+console.log("VERSION NATIVE") 
+
 // Moteur de recherche principal
 const mainSearchEngine = document.getElementById("mainSearchEngine")
 mainSearchEngine.addEventListener("input",searchRecipe)

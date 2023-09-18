@@ -96,9 +96,9 @@ inputIngredient.oninput = function() {
     var text = inputIngredient.value.toUpperCase();
     for (let option of datalistOptionsIngr.options) {
         if(option.value.toUpperCase().indexOf(text) > -1){
-        option.style.display = "block";
-    }else{
-        option.style.display = "none";
+            option.style.display = "block";
+        }else{
+            option.style.display = "none";
         }
     };
 }
