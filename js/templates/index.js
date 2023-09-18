@@ -1,14 +1,14 @@
 // GESTION CHEVRONS FILTRES 
 
-// Sélectionnez tous les chevrons des filtres
+// Sélection de tous les chevrons des filtres
 const heads = document.querySelectorAll(".filterBtn .head");
 
-// Parcourez chaque chevron et ajoutez un événement de clic
+// Parcourir chaque chevron et ajout d'un événement de clic
 heads.forEach((head) => {
   head.addEventListener("click", (event) => {
     event.preventDefault();
     const parent = head.parentNode;
-    // Ajoutez ou supprimez la classe 'open' pour ouvrir ou fermer le filtre
+    // Ajout ou supprimme la classe 'open' pour ouvrir ou fermer le filtre
     parent.classList.toggle("open");
   });
 });
